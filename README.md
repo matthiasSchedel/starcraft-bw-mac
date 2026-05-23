@@ -185,6 +185,36 @@ cd "$GAME_DIR"
 Skip intro segments with Esc. In the successful run, repeated Esc input advanced
 through multiple intro screens into the main menu.
 
+## Fullscreen / native resolution
+
+StarCraft 1.16.1 still renders a low-resolution DirectDraw surface. For the
+CrossOver builtin-DirectDraw path, use a Wine virtual desktop at the Mac display
+size so CrossOver scales the game inside a screen-filling desktop:
+
+```sh
+./scripts/configure-fullscreen.sh
+```
+
+The script detects the first macOS display resolution when possible and falls
+back to `2560x1600`. Override with:
+
+```sh
+FULLSCREEN_WIDTH=1920 FULLSCREEN_HEIGHT=1080 ./scripts/configure-fullscreen.sh
+```
+
+Manual equivalent:
+
+```sh
+"$CX_ROOT/bin/wine" --bottle=starcraft-bw reg add \
+  'HKCU\Software\Wine\Explorer\Desktops' \
+  /v Default /d 2560x1600 /f
+
+"$CX_ROOT/bin/wine" --bottle=starcraft-bw explorer \
+  /desktop=Default,2560x1600 StarCraft.exe
+```
+
+CrossOver's active Wine window can also be toggled with `Cmd+Option+F`.
+
 ## Proof
 
 | File | What it shows |
