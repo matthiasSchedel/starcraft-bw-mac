@@ -225,6 +225,28 @@ CrossOver 26.1.0's patched Wine runtime bypassed that VM allocation failure.
 Native cnc-ddraw inside CrossOver did not produce a visible StarCraft window in
 the retry run; CrossOver builtin DirectDraw did.
 
+## HD / Modern Resolution Path
+
+The legacy 1.16.1 CrossOver recipe above stays as v1. There is no clean free HD
+drop-in for that legacy executable. The proper HD route is **StarCraft:
+Remastered**, Blizzard's official Windows/macOS release with HD graphics and
+modern Battle.net integration:
+
+- Product page: <https://starcraft.blizzard.com/>
+- Blizzard system requirements: <https://us.support.blizzard.com/article/28438>
+
+Do not try to bolt an HD asset pack onto the 1.16.1 folder in this repo. The
+practical choices are:
+
+| Path | Status |
+|---|---|
+| Keep v1 | Free if you already have legal classic game data; proven to reach the 1.16.1 menu through CrossOver. |
+| StarCraft: Remastered | Paid official HD route; install via Battle.net / Blizzard and use Blizzard's native macOS support where available. Not installed here because it is paid software. |
+| DXVK / D3DMetal | Not applicable to the proven v1 path; StarCraft 1.16.1 uses DirectDraw, not a D3D9+ renderer. |
+
+No `scripts/hd-setup.sh` is included because the only clean HD route requires a
+paid official install.
+
 ## Remaining Walls
 
 | Wall | Current state |
