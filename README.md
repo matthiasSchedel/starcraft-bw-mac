@@ -270,11 +270,23 @@ login is the one manual step — everything else is scripted.
 ./scripts/launch-starcraft-native.sh
 ```
 
+**Cost: $0.** The classic StarCraft + Brood War in SD graphics is **free** — you
+do not need to buy anything to play Brood War fullscreen. *StarCraft: Remastered*
+(HD widescreen) is a paid in-client upgrade, and *StarCraft II* is a separate
+game; neither is required for this path.
+
+**Apple Silicon note:** the Battle.net installer Blizzard ships is Intel-only and
+needs Rosetta 2 (`softwareupdate --install-rosetta --agree-to-license`). The game
+itself has a native Apple Silicon build that Battle.net pulls down after login.
+The install script checks for Rosetta and tells you if it's missing.
+
 What the install script does:
 
+- ensures Rosetta 2 is present (Apple Silicon)
 - `brew install --cask battle-net` (skipped if already present)
-- opens Battle.net and prints the exact clicks: log in → **Games → StarCraft →
-  Install** (the classic game is free; you do *not* need to buy Remastered)
+- opens the Battle.net installer and prints the exact clicks: log in → **Games →
+  StarCraft → Install** (the classic game is free; you do *not* need to buy
+  Remastered)
 
 Fullscreen: the native client is fullscreen by default. If it opens windowed,
 set **Options → Graphics → Display Mode → Fullscreen** (or
