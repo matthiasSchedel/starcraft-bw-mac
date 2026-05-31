@@ -10,6 +10,17 @@ or StarCraft Remastered.
 No game files are included in this repo. You need to provide your own legal copy
 of StarCraft + Brood War.
 
+## Two paths
+
+| Path | Version | Fullscreen | Effort | Needs |
+|---|---|---|---|---|
+| **A. CrossOver (this README's main recipe)** | exact 1.16.1 | not yet solved (menu in a 1280×960 window) | high | CrossOver ($), your own legal 1.16.1 files |
+| **B. Free native client** ([guide](#alternative-free-native-client-fullscreen-out-of-the-box)) | 1.18+ / Remastered engine, free SD mode | native, out of the box | low | free Blizzard account, Battle.net |
+
+If your goal is **"play Brood War fullscreen on this Mac today,"** use Path B — it
+runs natively (no Wine), is free, and renders fullscreen by default. Use Path A
+only if you specifically need the exact pre-Remastered **1.16.1** binary.
+
 ## Status
 
 | Aspect | State |
@@ -239,6 +250,41 @@ Wine surface or use a Wine-side input mechanism so StarCraft receives absolute
 mouse movement/clicks. The menu coordinate used for Single Player in the test
 surface was approximately `x=210 y=121` in the StarCraft-rendered surface.
 
+## Alternative: Free native client (fullscreen out of the box)
+
+If you don't need the exact 1.16.1 binary, skip Wine entirely. Since 2017
+Blizzard gives **StarCraft + Brood War away for free**: the modern client
+(patch 1.18+, the Remastered engine running in free SD graphics mode) is a
+**native macOS app**. It renders fullscreen by default — no CrossOver, no
+DirectDraw wrangling, no menu-mouse wall.
+
+The only catch: Blizzard ships the game solely through the Battle.net desktop
+app, and the download is gated behind a (free) Blizzard account login. That
+login is the one manual step — everything else is scripted.
+
+```sh
+# 1. Install Battle.net + open it (then log in and install StarCraft in the UI)
+./scripts/install-starcraft-native.sh
+
+# 2. After the in-app download finishes, launch the native game
+./scripts/launch-starcraft-native.sh
+```
+
+What the install script does:
+
+- `brew install --cask battle-net` (skipped if already present)
+- opens Battle.net and prints the exact clicks: log in → **Games → StarCraft →
+  Install** (the classic game is free; you do *not* need to buy Remastered)
+
+Fullscreen: the native client is fullscreen by default. If it opens windowed,
+set **Options → Graphics → Display Mode → Fullscreen** (or
+"Fullscreen (Windowed)"), or use the macOS green full-screen button /
+Control-Command-F.
+
+This is a different product from Path A: it's 1.18+/Remastered-engine, not the
+pre-Remastered 1.16.1 binary. Versions of StarCraft are not save/replay
+compatible across major patches. Pick the path that matches your goal.
+
 ## Repo Layout
 
 ```text
@@ -248,8 +294,11 @@ surface was approximately `x=210 y=121` in the StarCraft-rendered surface.
 │   ├── intro-to-menu-montage.png
 │   └── main-menu-crossover-1.16.1.png
 └── scripts/
-    ├── create-crossover-bottle.sh
-    └── launch-starcraft.sh
+    ├── create-crossover-bottle.sh        # Path A: build the CrossOver bottle
+    ├── launch-starcraft.sh               # Path A: launch 1.16.1 in CrossOver
+    ├── build-app.sh                       # Path A: build StarCraft.app launcher
+    ├── install-starcraft-native.sh       # Path B: install Battle.net + free client
+    └── launch-starcraft-native.sh        # Path B: launch the native game
 ```
 
 ## License
